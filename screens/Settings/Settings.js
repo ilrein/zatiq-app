@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const AnotherScreen = ({
+const Settings = ({
   navigation,
 }) => (
   <View style={styles.container}>
@@ -22,4 +22,4 @@ const AnotherScreen = ({
   </View>
 );
 
-export default AnotherScreen;
+export default Settings;

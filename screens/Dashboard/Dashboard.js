@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
+// import { withAuthenticator } from 'aws-amplify-react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Home = ({
+const Dashboard = ({
   navigation,
 }) => (
   <View style={styles.container}>
@@ -22,4 +23,4 @@ const Home = ({
   </View>
 );
 
-export default Home;
+export default Dashboard;

@@ -5,31 +5,33 @@ import {
   createBottomTabNavigator,
   createAppContainer,
 } from 'react-navigation';
+import Amplify from 'aws-amplify';
 
 // Auth
 import Login from './screens/Auth/Login';
 
 // Main
-import Home from './screens/Home';
+import Dashboard from './screens/Dashboard';
 import Settings from './screens/Settings';
 
-// Login: {
-//   screen: Login,
-// },
+// Amplify setup
+import AWSExports from './aws-exports'
+
+Amplify.configure(AWSExports);
 
 const AuthStack = createStackNavigator({
   Login,
 });
 
 const AppStack = createBottomTabNavigator({
-  Home: {
-    screen: Home,
+  Dashboard: {
+    screen: Dashboard,
   },
   Settings: {
     screen: Settings
   }
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'Dashboard',
 });
 
 export default createAppContainer(createSwitchNavigator({
