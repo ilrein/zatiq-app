@@ -1,26 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import {
+  createStackNavigator,
+  createAppContainer,
+} from 'react-navigation';
 
-<Button
-  title="Solid Button"
-/>
+import Home from './screens/Home';
+import Settings from './screens/Settings';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Button
-        title="Poke Jay"
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: Home,
   },
+  Settings: {
+    screen: Settings
+  }
+}, {
+  initialRouteName: 'Home',
 });
+
+export default createAppContainer(AppNavigator);
