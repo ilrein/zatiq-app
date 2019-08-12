@@ -1,0 +1,26 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "zatiq-app-dev-20190812120605-authRole",
+            "UnauthRoleArn": "arn:aws:iam::869691786575:role/zatiq-app-dev-20190812120605-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::869691786575:role/zatiq-app-dev-20190812120605-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "zatiq-app-dev-20190812120605-deployment",
+            "UnauthRoleName": "zatiq-app-dev-20190812120605-unauthRole",
+            "StackName": "zatiq-app-dev-20190812120605",
+            "StackId": "arn:aws:cloudformation:us-east-1:869691786575:stack/zatiq-app-dev-20190812120605/16ded620-bd1b-11e9-a9af-126c686965ae"
+        }
+    },
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "zatiq-app-prod-20190812120724-authRole",
+            "UnauthRoleArn": "arn:aws:iam::869691786575:role/zatiq-app-prod-20190812120724-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::869691786575:role/zatiq-app-prod-20190812120724-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "zatiq-app-prod-20190812120724-deployment",
+            "UnauthRoleName": "zatiq-app-prod-20190812120724-unauthRole",
+            "StackName": "zatiq-app-prod-20190812120724",
+            "StackId": "arn:aws:cloudformation:us-east-1:869691786575:stack/zatiq-app-prod-20190812120724/464e3d10-bd1b-11e9-8372-0abba895ce2c"
+        }
+    }
+}
