@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
 const styles = StyleSheet.create({
@@ -11,15 +11,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const AnotherScreen = ({
+const Login = ({
   navigation,
 }) => (
   <View style={styles.container}>
+    <Text>
+      Auth Stack
+    </Text>
     <Button
-      title="Logout"
-      onPress={() => navigation.navigate('Login')}
+      title="Login"
+      onPress={() => navigation.navigate('Home')}
     />
   </View>
 );
 
-export default AnotherScreen;
+export default Login;
