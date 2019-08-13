@@ -15,6 +15,10 @@ import Login from './screens/Auth/Login';
 import Dashboard from './screens/Dashboard';
 import Settings from './screens/Settings';
 
+// Subpages
+import Restaurant from './screens/Restaurant';
+import Reserve from './screens/Restaurant/Reserve';
+
 // Amplify setup
 import AWSExports from './aws-exports'
 
@@ -29,7 +33,7 @@ const AuthStack = createStackNavigator({
   Login,
 });
 
-const AppStack = createBottomTabNavigator({
+const TabStack = createBottomTabNavigator({
   Dashboard: {
     screen: Dashboard,
   },
@@ -40,11 +44,19 @@ const AppStack = createBottomTabNavigator({
   initialRouteName: 'Dashboard',
 });
 
-const Navigation = createAppContainer(createSwitchNavigator({
-  App: AppStack,
-  Auth: AuthStack,
+const DetailsStack = createStackNavigator({
+  Restaurant,
+  Reserve,
 }, {
-  initialRouteName: 'App'
+  initialRouteName: 'Restaurant',
+});
+
+const Navigation = createAppContainer(createSwitchNavigator({
+  Auth: AuthStack,
+  App: TabStack,
+  Details: DetailsStack,
+}, {
+  initialRouteName: 'Auth'
 }));
 
 const App = () => (

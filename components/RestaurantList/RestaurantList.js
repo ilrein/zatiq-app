@@ -33,7 +33,9 @@ const RestaurantList = ({
           </Text>
           <Button
             title="Eat Here"
-            // onPress={() => navigation.navigate('/restaurant')}
+            onPress={() => navigation.navigate('Restaurant', {
+              restaurant,
+            })}
           />
         </Card>
       ))

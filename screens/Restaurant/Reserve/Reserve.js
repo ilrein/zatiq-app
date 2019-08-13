@@ -5,12 +5,12 @@ import {
   Button,
 } from 'react-native-elements';
 
-import { ORANGE } from '../../constants/kulers';
+import { ORANGE } from '../../../constants/kulers';
 
-const Restaurant = ({ navigation }) => {
-  const restaurant = navigation.getParam('restaurant');
+const Reserve = ({ navigation }) => {
+  // const restaurant = navigation.getParam('restaurant');
 
-  console.log(restaurant);
+  // console.log(restaurant);
 
   return (
     <View>
@@ -18,10 +18,10 @@ const Restaurant = ({ navigation }) => {
         leftComponent={{
           icon: 'add',
           color: '#fff',
-          onPress: () => navigation.navigate('Dashboard'),
+          onPress: () => navigation.goBack(),
         }}
         centerComponent={{
-          text: restaurant.name,
+          text: 'Make Reserve',
           style: { color: 'white' },
         }}
         containerStyle={{
@@ -29,18 +29,18 @@ const Restaurant = ({ navigation }) => {
         }}
       />
       <Text>
-        {restaurant.description}
+        Lorem Ipsum
       </Text>
       <Button
-        title="Step 2"
-        onPress={() => navigation.navigate('Reserve')}
+        title="Confirm"
+        // onPress={() => navigation.navigate('')}
       />
     </View>
   );
 }
 
-Restaurant.defaultProps = {
+Reserve.defaultProps = {
   restaurant: {},
 };
 
-export default Restaurant;
+export default Reserve;

@@ -39,7 +39,10 @@ const Dashboard = ({
         backgroundColor: ORANGE,
       }}
     />
-    <RestaurantList restaurants={fakeData} />
+    <RestaurantList
+      restaurants={fakeData}
+      navigation={navigation}
+    />
   </View>
 );
 
