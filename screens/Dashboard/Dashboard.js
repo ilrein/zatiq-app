@@ -1,14 +1,15 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Header } from 'react-native-elements';
 
 import RestaurantView from '../../components/RestaurantView';
+import { ORANGE } from '../../constants/kulers';
+import { APP_NAME } from '../../constants/app';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 40,
     paddingBottom: 20,
   },
 });
@@ -30,6 +31,12 @@ const Dashboard = ({
   navigation,
 }) => (
   <View style={styles.container}>
+    <Header
+      centerComponent={{ text: APP_NAME, style: { color: '#fff' } }}
+      containerStyle={{
+        backgroundColor: ORANGE,
+      }}
+    />
     {/* <Button
       title="Poke Jay"
       // onPress={() => navigation.navigate('Settings')}
@@ -37,5 +44,9 @@ const Dashboard = ({
     <RestaurantView restaurants={fakeData} />
   </View>
 );
+
+Dashboard.navigationOptions = {
+  title: 'Home'
+}
 
 export default Dashboard;
