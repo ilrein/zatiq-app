@@ -12,7 +12,7 @@ import { connect, Provider } from 'react-redux';
 import Login from './screens/Auth/Login';
 
 // Main
-import Dashboard from './screens/Dashboard';
+import Feed from './screens/Feed';
 import Settings from './screens/Settings';
 
 // Subpages
@@ -34,11 +34,11 @@ const AuthStack = createStackNavigator({
 });
 
 const DetailsStack = createStackNavigator({
-  Dashboard,
+  Feed,
   Restaurant,
   Reserve,
 }, {
-  initialRouteName: 'Dashboard',
+  initialRouteName: 'Feed',
 });
 
 const TabStack = createBottomTabNavigator({

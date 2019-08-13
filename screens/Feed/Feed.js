@@ -29,7 +29,7 @@ const fakeData = [
   }
 ];
 
-const Dashboard = ({
+const Feed = ({
   navigation,
 }) => (
   <View style={styles.container}>
@@ -40,8 +40,8 @@ const Dashboard = ({
   </View>
 );
 
-Dashboard.navigationOptions = {
+Feed.navigationOptions = {
   title: 'Home'
 };
 
-export default Dashboard;
+export default Feed;
