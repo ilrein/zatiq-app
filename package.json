@@ -9,8 +9,11 @@
   },
   "dependencies": {
     "aws-amplify": "^1.1.36",
+    "aws-amplify-react": "^2.3.12",
     "aws-amplify-react-native": "^2.1.16",
     "expo": "^34.0.1",
+    "expo-facebook": "~6.0.0",
+    "prop-types": "^15.7.2",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",

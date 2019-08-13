@@ -1,8 +1,9 @@
 import React from 'react';
-import Expo from 'expo';
-import Amplify, { Auth } from 'aws-amplify';
+import * as Facebook from 'expo-facebook';
+import { Auth } from 'aws-amplify';
 import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
+// import { withOAuth } from 'aws-amplify-react';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,25 +18,33 @@ const Login = ({
   navigation,
 }) => {
   const signIn = async () => {
-    // console.log(Expo);
-    // return;
-    const { type, token, expires } = await Expo.Facebook.logInWithReadPermissionsAsync('705885429837326', {
-      permissions: ['public_profile'],
-    });
+    // const { type, token, expires } = await Facebook.logInWithReadPermissionsAsync(
+    //   '705885429837326', {
+    //     permissions: ['public_profile'],
+    //     behavior: 'native',
+    //   }
+    // );
 
-    if (type === 'success') {
-      // sign in with federated identity
-      Auth.federatedSignIn(
-        'facebook',
-        { token, expires_at: expires },
-        { name: 'USER_NAME' }
-      )
-        .then(credentials => {
-          console.log('get aws credentials', credentials);
-        }).catch(e => {
-          console.log(e);
-        });
-    }
+    // if (type === 'success') {
+    //   // sign in with federated identity
+
+    //   const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+    //   const { name } = await response.json();
+    //   // console.log(name);
+    //   // return
+
+    //   Auth.federatedSignIn(
+    //     'facebook',
+    //     { token, expires_at: expires },
+    //     { name, }
+    //   )
+    //     .then(credentials => {
+    //       console.log('get aws credentials', credentials);
+    //     }).catch(e => {
+    //       console.log(e);
+    //     });
+    // }
+    
   }
 
   return (
