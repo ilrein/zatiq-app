@@ -18,34 +18,34 @@ const Login = ({
   navigation,
 }) => {
   const signIn = async () => {
-    navigation.navigate('Dashboard');
-    // const { type, token, expires } = await Facebook.logInWithReadPermissionsAsync(
-    //   '705885429837326', {
-    //     permissions: ['public_profile'],
-    //     behavior: 'native',
-    //   }
-    // );
+    const { type, token, expires } = await Facebook.logInWithReadPermissionsAsync(
+      '705885429837326', {
+        permissions: ['public_profile', 'email'],
+        // behavior: 'native',
+      }
+    );
 
-    // if (type === 'success') {
-    //   // sign in with federated identity
+    if (type === 'success') {
+      console.log(type);
 
-    //   const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-    //   const { name } = await response.json();
-    //   // console.log(name);
-    //   // return
+      navigation.navigate('Dashboard');
 
-    //   Auth.federatedSignIn(
-    //     'facebook',
-    //     { token, expires_at: expires },
-    //     { name, }
-    //   )
-    //     .then(credentials => {
-    //       console.log('get aws credentials', credentials);
-    //     }).catch(e => {
-    //       console.log(e);
-    //     });
-    // }
-    
+      // const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+      // const { name } = await response.json();
+      // console.log(name);
+      // // // return
+
+      // Auth.federatedSignIn(
+      //   'facebook',
+      //   { token, expires_at: expires },
+      //   { name }
+      // )
+      //   .then(credentials => {
+      //     console.log('get aws credentials', credentials);
+      //   }).catch(e => {
+      //     console.log(e);
+      //   });
+    }
   }
 
   return (
