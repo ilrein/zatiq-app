@@ -18,6 +18,7 @@ const Login = ({
   navigation,
 }) => {
   const signIn = async () => {
+    navigation.navigate('Dashboard');
     // const { type, token, expires } = await Facebook.logInWithReadPermissionsAsync(
     //   '705885429837326', {
     //     permissions: ['public_profile'],

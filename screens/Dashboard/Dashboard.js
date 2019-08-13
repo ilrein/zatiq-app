@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Header } from 'react-native-elements';
 
-import RestaurantView from '../../components/RestaurantView';
+import RestaurantList from '../../components/RestaurantList';
 import { ORANGE } from '../../constants/kulers';
 import { APP_NAME } from '../../constants/app';
 
@@ -18,12 +18,14 @@ const fakeData = [
   {
     _id: '123',
     name: "Place",
-    subtitle: '123 Front St'
+    address: '123 Front St',
+    description: 'Lorem ipsum hello world extra alphabet',
   },
   {
     _id: '124',
     name: "Pad",
-    subtitle: '456 Front St'
+    address: '456 Front St',
+    description: 'Lorem ipsum hello world extra alphabet, lorem ipsum hello world extra alphabet. lorem ipsum hello world extra alphabet, lorem ipsum hello world extra alphabet.',
   }
 ];
 
@@ -37,11 +39,7 @@ const Dashboard = ({
         backgroundColor: ORANGE,
       }}
     />
-    {/* <Button
-      title="Poke Jay"
-      // onPress={() => navigation.navigate('Settings')}
-    /> */}
-    <RestaurantView restaurants={fakeData} />
+    <RestaurantList restaurants={fakeData} />
   </View>
 );
 
