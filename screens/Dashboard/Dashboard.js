@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Header } from 'react-native-elements';
+// import { Header } from 'react-native-elements';
 
 import RestaurantList from '../../components/RestaurantList';
 import { ORANGE } from '../../constants/kulers';
@@ -33,12 +33,6 @@ const Dashboard = ({
   navigation,
 }) => (
   <View style={styles.container}>
-    <Header
-      centerComponent={{ text: APP_NAME, style: { color: '#fff' } }}
-      containerStyle={{
-        backgroundColor: ORANGE,
-      }}
-    />
     <RestaurantList
       restaurants={fakeData}
       navigation={navigation}
@@ -47,7 +41,7 @@ const Dashboard = ({
 );
 
 Dashboard.navigationOptions = {
-  // title: 'Home'
-}
+  title: 'Home'
+};
 
 export default Dashboard;

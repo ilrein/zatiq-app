@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { 
-  Header,
   Button,
 } from 'react-native-elements';
 
@@ -14,26 +13,15 @@ const Restaurant = ({ navigation }) => {
 
   return (
     <View>
-      <Header
-        leftComponent={{
-          icon: 'add',
-          color: '#fff',
-          onPress: () => navigation.navigate('Dashboard'),
-        }}
-        centerComponent={{
-          text: restaurant.name,
-          style: { color: 'white' },
-        }}
-        containerStyle={{
-          backgroundColor: ORANGE,
-        }}
-      />
       <Text>
         {restaurant.description}
       </Text>
       <Button
         title="Step 2"
         onPress={() => navigation.navigate('Reserve')}
+        buttonStyle={{
+          backgroundColor: ORANGE,
+        }}
       />
     </View>
   );
@@ -42,5 +30,9 @@ const Restaurant = ({ navigation }) => {
 Restaurant.defaultProps = {
   restaurant: {},
 };
+
+Restaurant.navigationOptions = ({ navigation }) => ({
+  title: navigation.getParam('restaurant').name,
+});
 
 export default Restaurant;

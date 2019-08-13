@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { 
-  Header,
   Button,
 } from 'react-native-elements';
 
@@ -14,25 +13,14 @@ const Reserve = ({ navigation }) => {
 
   return (
     <View>
-      <Header
-        leftComponent={{
-          icon: 'add',
-          color: '#fff',
-          onPress: () => navigation.goBack(),
-        }}
-        centerComponent={{
-          text: 'Make Reserve',
-          style: { color: 'white' },
-        }}
-        containerStyle={{
-          backgroundColor: ORANGE,
-        }}
-      />
       <Text>
         Lorem Ipsum
       </Text>
       <Button
         title="Confirm"
+        buttonStyle={{
+          backgroundColor: ORANGE,
+        }}
         // onPress={() => navigation.navigate('')}
       />
     </View>
