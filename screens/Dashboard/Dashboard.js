@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingBottom: 20,
+    // paddingBottom: 20,
   },
 });
 
@@ -47,7 +47,7 @@ const Dashboard = ({
 );
 
 Dashboard.navigationOptions = {
-  title: 'Home'
+  // title: 'Home'
 }
 
 export default Dashboard;

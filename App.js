@@ -33,28 +33,24 @@ const AuthStack = createStackNavigator({
   Login,
 });
 
-const TabStack = createBottomTabNavigator({
-  Dashboard: {
-    screen: Dashboard,
-  },
-  Settings: {
-    screen: Settings
-  }
+const DetailsStack = createStackNavigator({
+  Dashboard,
+  Restaurant,
+  Reserve,
 }, {
   initialRouteName: 'Dashboard',
 });
 
-const DetailsStack = createStackNavigator({
-  Restaurant,
-  Reserve,
+const TabStack = createBottomTabNavigator({
+  Home: DetailsStack,
+  Settings,
 }, {
-  initialRouteName: 'Restaurant',
+  initialRouteName: 'Home',
 });
 
 const Navigation = createAppContainer(createSwitchNavigator({
   Auth: AuthStack,
   App: TabStack,
-  Details: DetailsStack,
 }, {
   initialRouteName: 'Auth'
 }));
