@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as Facebook from 'expo-facebook';
 import { Auth } from 'aws-amplify';
 import { StyleSheet, View, Text } from 'react-native';
@@ -16,33 +16,44 @@ const styles = StyleSheet.create({
 const Login = ({
   navigation,
 }) => {
+  const isLoggedInAlready = async () => {
+    const currentUser = await Auth.currentAuthenticatedUser()
+
+    if (currentUser) {
+      console.log(currentUser);
+      navigation.navigate('Feed');
+    };
+  }
+
+  useEffect(() => {
+    isLoggedInAlready();
+  }, []);
+
   const signIn = async () => {
-    navigation.navigate('Feed');
-    // const { type, token, expires } = await Facebook.logInWithReadPermissionsAsync(
-    //   '705885429837326', {
-    //     permissions: ['public_profile', 'email'],
-    //     // behavior: 'native',
-    //   }
-    // );
+    const { type, token, expires } = await Facebook.logInWithReadPermissionsAsync(
+      '705885429837326', {
+        permissions: ['public_profile', 'email'],
+      }
+    );
 
-    // if (type === 'success') {
+    if (type === 'success') {
 
-    //   // const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-    //   // const { name } = await response.json();
-    //   // console.log(name);
-    //   // // // return
+      const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+      const { name } = await response.json();
+      console.log(name);
 
-    //   // Auth.federatedSignIn(
-    //   //   'facebook',
-    //   //   { token, expires_at: expires },
-    //   //   { name }
-    //   // )
-    //   //   .then(credentials => {
-    //   //     console.log('get aws credentials', credentials);
-    //   //   }).catch(e => {
-    //   //     console.log(e);
-    //   //   });
-    // }
+      Auth.federatedSignIn(
+        'facebook',
+        { token, expires_at: expires },
+        { name }
+      )
+        .then(credentials => {
+          console.log('get aws credentials', credentials);
+          navigation.navigate('Feed');
+        }).catch(e => {
+          console.log(e);
+        });
+    }
   }
 
   return (

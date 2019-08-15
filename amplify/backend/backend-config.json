@@ -1,13 +1,7 @@
 {
 	"auth": {
-		"cognito31d20872": {
+		"cognitoa5c1331c": {
 			"service": "Cognito",
-			"providerPlugin": "awscloudformation"
-		}
-	},
-	"hosting": {
-		"S3AndCloudFront": {
-			"service": "S3AndCloudFront",
 			"providerPlugin": "awscloudformation"
 		}
 	}

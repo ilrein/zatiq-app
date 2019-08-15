@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import { Button } from 'react-native-elements';
+import { Auth } from 'aws-amplify';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,13 +14,21 @@ const styles = StyleSheet.create({
 
 const Settings = ({
   navigation,
-}) => (
-  <View style={styles.container}>
-    <Button
-      title="Logout"
-      onPress={() => navigation.navigate('Login')}
-    />
-  </View>
-);
+}) => {
+  const logOut = () => {
+    Auth.signOut()
+      .then(() => navigation.navigate('Login'))
+      .catch(e => Alert.alert(JSON.stringify(e)))
+  }
+    
+  return (
+    <View style={styles.container}>
+      <Button
+        title="Logout"
+        onPress={logOut}
+      />
+    </View>
+  );
+};
 
 export default Settings;
