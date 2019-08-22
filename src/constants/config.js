@@ -1,4 +1,4 @@
-export const APP_NAME = 'Zatiq';
+export const APP_NAME = 'DineHub';
 
 // prod
 // export const API_URL = 'https://contractstyle.com';

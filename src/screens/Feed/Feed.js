@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 
 import RestaurantList from '../../components/RestaurantList';
 import { ORANGE } from '../../constants/kulers';
-import { APP_NAME } from '../../constants/app';
+import { APP_NAME } from '../../constants/config';
 
 const styles = StyleSheet.create({
   container: {
