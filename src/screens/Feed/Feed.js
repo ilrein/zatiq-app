@@ -17,13 +17,13 @@ const styles = StyleSheet.create({
 const fakeData = [
   {
     _id: '123',
-    name: "Place",
+    name: 'Place',
     address: '123 Front St',
     description: 'Lorem ipsum hello world extra alphabet',
   },
   {
     _id: '124',
-    name: "Pad",
+    name: 'Pad',
     address: '456 Front St',
     description: 'Lorem ipsum hello world extra alphabet, lorem ipsum hello world extra alphabet. lorem ipsum hello world extra alphabet, lorem ipsum hello world extra alphabet.',
   }

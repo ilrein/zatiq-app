@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import * as Facebook from 'expo-facebook';
 import { Auth } from 'aws-amplify';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -27,12 +27,12 @@ const Login = ({
       if (currentUser) {
         console.log(currentUser);
         navigation.navigate('Feed');
-      };
+      }
     } catch (error) {
       // user is not authenticated
       // do nothing
     }
-  }
+  };
 
   useEffect(() => {
     isLoggedInAlready();
@@ -42,7 +42,7 @@ const Login = ({
     const { type, token, expires } = await Facebook.logInWithReadPermissionsAsync(
       '705885429837326', {
         permissions: ['public_profile', 'email'],
-      }
+      },
     );
 
     if (type === 'success') {
@@ -52,16 +52,16 @@ const Login = ({
       Auth.federatedSignIn(
         'facebook',
         { token, expires_at: expires },
-        { name }
+        { name },
       )
-        .then(credentials => {
+        .then((credentials) => {
           captureUser(credentials);
           navigation.navigate('Feed');
         }).catch(e => {
           console.log(e);
         });
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -71,7 +71,7 @@ const Login = ({
       />
     </View>
   );
-}
+};
 
 Login.navigationOptions = {
   title: 'Login',
@@ -79,10 +79,10 @@ Login.navigationOptions = {
 
 export default connect(
   null,
-  dispatch => ({
-    captureUser: payload => dispatch({
+  (dispatch) => ({
+    captureUser: (payload) => dispatch({
       type: CAPTURE_USER,
       payload,
-    })
-  })
+    }),
+  }),
 )(Login);
