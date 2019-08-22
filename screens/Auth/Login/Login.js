@@ -3,6 +3,9 @@ import * as Facebook from 'expo-facebook';
 import { Auth } from 'aws-amplify';
 import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+
+import { CAPTURE_USER } from '../../../constants/types';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,14 +18,20 @@ const styles = StyleSheet.create({
 
 const Login = ({
   navigation,
+  captureUser,
 }) => {
   const isLoggedInAlready = async () => {
-    const currentUser = await Auth.currentAuthenticatedUser()
+    try {
+      const currentUser = await Auth.currentAuthenticatedUser();
 
-    if (currentUser) {
-      console.log(currentUser);
-      navigation.navigate('Feed');
-    };
+      if (currentUser) {
+        console.log(currentUser);
+        navigation.navigate('Feed');
+      };
+    } catch (error) {
+      // user is not authenticated
+      // do nothing
+    }
   }
 
   useEffect(() => {
@@ -37,10 +46,8 @@ const Login = ({
     );
 
     if (type === 'success') {
-
       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
       const { name } = await response.json();
-      console.log(name);
 
       Auth.federatedSignIn(
         'facebook',
@@ -48,7 +55,7 @@ const Login = ({
         { name }
       )
         .then(credentials => {
-          console.log('get aws credentials', credentials);
+          captureUser(credentials);
           navigation.navigate('Feed');
         }).catch(e => {
           console.log(e);
@@ -58,9 +65,6 @@ const Login = ({
 
   return (
     <View style={styles.container}>
-      <Text>
-        Auth Stack
-      </Text>
       <Button
         title="Login"
         onPress={signIn}
@@ -73,4 +77,12 @@ Login.navigationOptions = {
   title: 'Login',
 };
 
-export default Login;
+export default connect(
+  null,
+  dispatch => ({
+    captureUser: payload => dispatch({
+      type: CAPTURE_USER,
+      payload,
+    })
+  })
+)(Login);

@@ -1,6 +1,6 @@
 import {
   CAPTURE_RESTAURANTS,
-} from '../../constants/actions';
+} from '../../constants/types';
 
 function restaurantsReducer(state = {}, action) {
   switch (action.type) {
