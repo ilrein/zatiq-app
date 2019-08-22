@@ -6,24 +6,24 @@ import {
   createAppContainer,
 } from 'react-navigation';
 import Amplify from 'aws-amplify';
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 
 // Auth
-import Login from './screens/Auth/Login';
+import Login from './src/screens/Auth/Login';
 
 // Main
-import Feed from './screens/Feed';
-import Settings from './screens/Settings';
+import Feed from './src/screens/Feed';
+import Settings from './src/screens/Settings';
 
 // Subpages
-import Restaurant from './screens/Restaurant';
-import Reserve from './screens/Restaurant/Reserve';
+import Restaurant from './src/screens/Restaurant';
+import Reserve from './src/screens/Restaurant/Reserve';
 
 // Amplify setup
-import AWSExports from './aws-exports'
+import AWSExports from './src/aws-exports'
 
 // Store
-import configureStore from './store';
+import configureStore from './src/store';
 
 const store = configureStore();
 
