@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { CAPTURE_USER } from '../../../constants/types';
-import { APP_NAME } from '../../../constants/config';
+import { APP_NAME, API_URL } from '../../../constants/config';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,6 +49,24 @@ const Login = ({
     isLoggedInAlready();
   }, []);
 
+  const authUser = async (creds) => {
+    try {
+      const post = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+
+        },
+      });
+
+      const result = await post.json();
+
+      console.log(result);
+    } catch (error) {
+      console.log(error); // eslint-disable-line
+    }
+  };
+
   const signIn = async () => {
     setLoading(true);
     
@@ -69,6 +87,18 @@ const Login = ({
       )
         .then((credentials) => {
           captureUser(credentials);
+          console.log(credentials);
+
+          const payload = {
+            sessionToken: credentials.sessionToken,
+            sub: credentials.data.IdentityId,
+            name,
+          };
+
+          console.log(payload);
+
+          // authUser(payload);
+
           setLoading(false);
           navigation.navigate('Feed');
         }).catch((e) => {

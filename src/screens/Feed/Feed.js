@@ -1,16 +1,15 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-// import { Header } from 'react-native-elements';
+import PropTypes from 'prop-types';
 
 import RestaurantList from '../../components/RestaurantList';
-import { ORANGE } from '../../constants/kulers';
-import { APP_NAME } from '../../constants/config';
+
+import { API_URL } from '../../constants/config';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // paddingBottom: 20,
   },
 });
 
@@ -26,22 +25,32 @@ const fakeData = [
     name: 'Pad',
     address: '456 Front St',
     description: 'Lorem ipsum hello world extra alphabet, lorem ipsum hello world extra alphabet. lorem ipsum hello world extra alphabet, lorem ipsum hello world extra alphabet.',
-  }
+  },
 ];
 
 const Feed = ({
   navigation,
-}) => (
-  <View style={styles.container}>
-    <RestaurantList
-      restaurants={fakeData}
-      navigation={navigation}
-    />
-  </View>
-);
+}) => {
+  const getRestaurants = async () => {
+    // fetch(API_URL)
+  };
+
+  return (
+    <View style={styles.container}>
+      <RestaurantList
+        restaurants={fakeData}
+        navigation={navigation}
+      />
+    </View>
+  );
+};
 
 Feed.navigationOptions = {
-  title: 'Home'
+  title: 'Home',
+};
+
+Feed.propTypes = {
+  navigation: PropTypes.shape().isRequired,
 };
 
 export default Feed;
