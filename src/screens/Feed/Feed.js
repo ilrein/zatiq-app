@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import RestaurantList from '../../components/RestaurantList';
 
 import { API_URL } from '../../constants/config';
+import { CAPTURE_RESTAURANTS } from '../../constants/types';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
 const Feed = ({
   navigation,
   session,
+  captureRestaurants,
   // user,
 }) => {
   const [fetchingRestaurants, setFetchingRestaurants] = useState(false);
@@ -49,6 +51,7 @@ const Feed = ({
       const result = await get.json();
 
       setRestaurants(result);
+      captureRestaurants(result);
       setHaveFetchedRestaurants(true);
     } catch (error) {
       console.log('cannot fetch restaurants', error); // eslint-disable-line
@@ -91,8 +94,15 @@ Feed.navigationOptions = {
 Feed.propTypes = {
   navigation: PropTypes.shape().isRequired,
   session: PropTypes.string.isRequired,
+  captureRestaurants: PropTypes.func.isRequired,
 };
 
 export default connect(
   ({ session }) => ({ session }),
+  (dispatch) => ({
+    captureRestaurants: (payload) => dispatch({
+      type: CAPTURE_RESTAURANTS,
+      payload,
+    }),
+  }),
 )(Feed);
