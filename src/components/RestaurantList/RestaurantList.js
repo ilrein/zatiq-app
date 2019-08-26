@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView, Text } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import PropTypes from 'prop-types';
+import { Storage } from 'aws-amplify';
 
 import { ORANGE } from '../../constants/kulers';
 
@@ -14,14 +15,22 @@ const styles = StyleSheet.create({
   item: {
     flex: 0,
     width: '100%',
-  }
+  },
 });
 
 const RestaurantList = ({
   restaurants,
   navigation,
 }) => { // eslint-disable-line
-  // console.log(restaurants, restaurants.docs); 
+  const getImage = (uri = '5d643f4c8fbf0d8f1feb84b6/7d376ed9-87bb-46cc-896b-69540eaf3270-cluny-bistro.jpg') => {
+    // Storage.get(uri)
+    //   .then(file => console.log(file))
+  };
+
+  useEffect(() => {
+    getImage();
+  }, []);
+
   return (
     restaurants
     && restaurants.docs
@@ -31,7 +40,7 @@ const RestaurantList = ({
             restaurants.docs.map((restaurant) => (
               <Card
                 key={restaurant._id}
-                image={{ uri: 'https://via.placeholder.com/150' }}
+                image={{ uri: restaurant.image }}
                 title={restaurant.name}
                 onPress={() => console.log('test')}
               >

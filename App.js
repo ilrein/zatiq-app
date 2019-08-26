@@ -29,6 +29,13 @@ const store = configureStore();
 
 Amplify.configure(AWSExports);
 
+// Storage.configure({
+//   AWSS3: {
+//       bucket: '',//Your bucket name;
+//       region: ''//Specify the region your bucket was created in;
+//   }
+// });
+
 // Authentication related screens
 // all on the opening areas
 const AuthStack = createStackNavigator({
