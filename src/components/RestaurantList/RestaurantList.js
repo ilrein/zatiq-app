@@ -20,41 +20,48 @@ const styles = StyleSheet.create({
 const RestaurantList = ({
   restaurants,
   navigation,
-}) => (
-  <ScrollView style={styles.container}>
-    {
-      restaurants.map(restaurant => (
-        <Card
-          key={restaurant._id}
-          image={{ uri: 'https://via.placeholder.com/150' }}
-          title={restaurant.name}
-          onPress={() => { console.log('test')}}
-        >
-          <Text style={{ marginBottom: 10 }}>
-            {restaurant.description}
-          </Text>
-          <Button
-            title="Eat Here"
-            onPress={() => navigation.navigate('Restaurant', {
-              restaurant,
-            })}
-            buttonStyle={{
-              backgroundColor: ORANGE,
-            }}
-          />
-        </Card>
-      ))
-    }
-  </ScrollView>
-);
+}) => { // eslint-disable-line
+  // console.log(restaurants, restaurants.docs); 
+  return (
+    restaurants
+    && restaurants.docs
+      ? (
+        <ScrollView style={styles.container}>
+          {
+            restaurants.docs.map((restaurant) => (
+              <Card
+                key={restaurant._id}
+                image={{ uri: 'https://via.placeholder.com/150' }}
+                title={restaurant.name}
+                onPress={() => console.log('test')}
+              >
+                <Text style={{ marginBottom: 10 }}>
+                  {restaurant.description}
+                </Text>
+                <Button
+                  title="Eat Here"
+                  onPress={() => navigation.navigate('Restaurant', {
+                    restaurant,
+                  })}
+                  buttonStyle={{
+                    backgroundColor: ORANGE,
+                  }}
+                />
+              </Card>
+            ))
+          }
+        </ScrollView>
+      )
+      : null
+  );
+};
 
 RestaurantList.propTypes = {
-  restaurant: PropTypes.arrayOf(PropTypes.shape()),
+  restaurants: PropTypes.shape().isRequired,
+  navigation: PropTypes.shape().isRequired,
 };
 
-RestaurantList.defaultProps = {
-  restaurants: [],
-};
+RestaurantList.defaultProps = {};
 
 // RestaurantList.navigationOptions = {
 

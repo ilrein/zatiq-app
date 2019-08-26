@@ -1,7 +1,12 @@
 import React, {
+  useState,
   useEffect,
 } from 'react';
-import { StyleSheet, View } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -14,34 +19,67 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 const Feed = ({
   navigation,
-  user,
+  session,
+  // user,
 }) => {
+  const [fetchingRestaurants, setFetchingRestaurants] = useState(false);
+  const [haveFetchedRestaurants, setHaveFetchedRestaurants] = useState(false);
+  const [restaurants, setRestaurants] = useState({});
+
   const getRestaurants = async () => {
+    setFetchingRestaurants(true);
+
     try {
-      const get = fetch(`${API_URL}/restaurants`);
+      const get = await fetch(`${API_URL}/restaurants`, {
+        headers: {
+          'Content-Type': 'application/json',
+          token: session,
+        },
+      });
 
       const result = await get.json();
 
-      console.log(result);
+      setRestaurants(result);
+      setHaveFetchedRestaurants(true);
     } catch (error) {
-      console.log(error); // eslint-disable-line
+      console.log('cannot fetch restaurants', error); // eslint-disable-line
     }
+
+    setFetchingRestaurants(false);
   };
 
   useEffect(() => {
     getRestaurants();
-  }, [user.sub]);
+  }, []);
 
   return (
-    <View style={styles.container}>
-      {/* <RestaurantList
-        restaurants={fakeData}
-        navigation={navigation}
-      /> */}
+    <View
+      style={fetchingRestaurants ? styles.loading : styles.container}
+    >
+      {
+        fetchingRestaurants
+        && !haveFetchedRestaurants
+          ? (
+            <ActivityIndicator
+              size="large"
+            />
+          )
+          : (
+            <RestaurantList
+              restaurants={restaurants}
+              navigation={navigation}
+            />
+          )
+      }
     </View>
   );
 };
@@ -52,9 +90,9 @@ Feed.navigationOptions = {
 
 Feed.propTypes = {
   navigation: PropTypes.shape().isRequired,
-  user: PropTypes.shape().isRequired,
+  session: PropTypes.string.isRequired,
 };
 
 export default connect(
-  ({ user }) => ({ user }),
+  ({ session }) => ({ session }),
 )(Feed);

@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { CAPTURE_USER } from '../../../constants/types';
+import { CAPTURE_USER, CAPTURE_SESSION } from '../../../constants/types';
 import { API_URL } from '../../../constants/config';
 
 import AuthContainer from '../../../containers/AuthContainer';
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
 const Login = ({
   navigation,
   captureUser,
+  captureSession,
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -52,18 +53,17 @@ const Login = ({
         { name },
       )
         .then(async (credentials) => {
-          // console.log(credentials);
           const userParams = {
             sub: credentials._identityId,
             name,
           };
-          // console.log(userParams);
+          
           try {
             const post = await fetch(`${API_URL}/customers`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                // 'jwt-token': userParams.token,
+                token,
               },
               body: JSON.stringify({
                 customer: userParams,
@@ -72,6 +72,7 @@ const Login = ({
       
             const result = await post.json();
             captureUser(result);
+            captureSession(token);
           } catch (error) {
             console.log(error); // eslint-disable-line
           }
@@ -114,6 +115,7 @@ Login.navigationOptions = {
 Login.propTypes = {
   navigation: PropTypes.shape().isRequired,
   captureUser: PropTypes.func.isRequired,
+  captureSession: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -121,6 +123,10 @@ export default connect(
   (dispatch) => ({
     captureUser: (payload) => dispatch({
       type: CAPTURE_USER,
+      payload,
+    }),
+    captureSession: (payload) => dispatch({
+      type: CAPTURE_SESSION,
       payload,
     }),
   }),
