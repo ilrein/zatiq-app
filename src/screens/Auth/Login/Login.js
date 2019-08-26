@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as Facebook from 'expo-facebook';
 import { Auth } from 'aws-amplify';
 import { StyleSheet, View } from 'react-native';
@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 
 import { CAPTURE_USER } from '../../../constants/types';
 import { APP_NAME, API_URL } from '../../../constants/config';
+
+import AuthContainer from '../../../containers/AuthContainer';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,41 +33,23 @@ const Login = ({
 }) => {
   const [loading, setLoading] = useState(false);
 
-  const isLoggedInAlready = async () => {
-    try {
-      const currentUser = await Auth.currentAuthenticatedUser();
+  // const authUser = async (creds) => {
+  //   try {
+  //     const post = await fetch(API_URL, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
 
-      if (currentUser) {
-        console.log(currentUser); // eslint-disable-line
-        navigation.navigate('Feed');
-      }
-    } catch (error) {
-      // user is not authenticated
-      // do nothing :)
-    }
-  };
+  //       },
+  //     });
 
-  useEffect(() => {
-    isLoggedInAlready();
-  }, []);
+  //     const result = await post.json();
 
-  const authUser = async (creds) => {
-    try {
-      const post = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-
-        },
-      });
-
-      const result = await post.json();
-
-      console.log(result);
-    } catch (error) {
-      console.log(error); // eslint-disable-line
-    }
-  };
+  //     console.log(result);
+  //   } catch (error) {
+  //     console.log(error); // eslint-disable-line
+  //   }
+  // };
 
   const signIn = async () => {
     setLoading(true);
@@ -87,15 +71,15 @@ const Login = ({
       )
         .then((credentials) => {
           captureUser(credentials);
-          console.log(credentials);
+          // console.log(credentials);
 
-          const payload = {
-            sessionToken: credentials.sessionToken,
-            sub: credentials.data.IdentityId,
-            name,
-          };
+          // const payload = {
+          //   sessionToken: credentials.sessionToken,
+          //   sub: credentials.data.IdentityId,
+          //   name,
+          // };
 
-          console.log(payload);
+          // console.log(payload);
 
           // authUser(payload);
 
@@ -109,23 +93,25 @@ const Login = ({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Login with Facebook"
-          onPress={signIn}
-          loading={loading}
-          icon={(
-            <Icon
-              name="facebook-f"
-              size={20}
-              color="white"
-              style={styles.iconFormat}
-            />
-          )}
-        />
+    <AuthContainer navigation={navigation}>
+      <View style={styles.container}>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Login with Facebook"
+            onPress={signIn}
+            loading={loading}
+            icon={(
+              <Icon
+                name="facebook-f"
+                size={20}
+                color="white"
+                style={styles.iconFormat}
+              />
+            )}
+          />
+        </View>
       </View>
-    </View>
+    </AuthContainer>
   );
 };
 

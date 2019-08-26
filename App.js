@@ -29,10 +29,14 @@ const store = configureStore();
 
 Amplify.configure(AWSExports);
 
+// Authentication related screens
+// all on the opening areas
 const AuthStack = createStackNavigator({
   Login,
 });
 
+// Once you are authenticated
+// all the "inside" screens
 const DetailsStack = createStackNavigator({
   Feed,
   Restaurant,
@@ -41,6 +45,7 @@ const DetailsStack = createStackNavigator({
   initialRouteName: 'Feed',
 });
 
+// "inside" screens nested into a tab navigator
 const TabStack = createBottomTabNavigator({
   Home: DetailsStack,
   Settings,
@@ -48,6 +53,7 @@ const TabStack = createBottomTabNavigator({
   initialRouteName: 'Home',
 });
 
+// the root navigator which combines auth + inside tabs
 const Navigation = createAppContainer(createSwitchNavigator({
   Auth: AuthStack,
   App: TabStack,

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {
+  useEffect,
+} from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import RestaurantList from '../../components/RestaurantList';
 
@@ -13,34 +16,33 @@ const styles = StyleSheet.create({
   },
 });
 
-const fakeData = [
-  {
-    _id: '123',
-    name: 'Place',
-    address: '123 Front St',
-    description: 'Lorem ipsum hello world extra alphabet',
-  },
-  {
-    _id: '124',
-    name: 'Pad',
-    address: '456 Front St',
-    description: 'Lorem ipsum hello world extra alphabet, lorem ipsum hello world extra alphabet. lorem ipsum hello world extra alphabet, lorem ipsum hello world extra alphabet.',
-  },
-];
-
 const Feed = ({
   navigation,
+  user,
 }) => {
   const getRestaurants = async () => {
-    // fetch(API_URL)
+    console.log('get restaurants');
+    // try {
+    //   const get = fetch(`${API_URL}/restaurants`);
+
+    //   const result = await get.json();
+
+    //   console.log(result);
+    // } catch (error) {
+    //   console.log(error); // eslint-disable-line
+    // }
   };
+
+  useEffect(() => {
+    getRestaurants();
+  }, [user.id]);
 
   return (
     <View style={styles.container}>
-      <RestaurantList
+      {/* <RestaurantList
         restaurants={fakeData}
         navigation={navigation}
-      />
+      /> */}
     </View>
   );
 };
@@ -53,4 +55,6 @@ Feed.propTypes = {
   navigation: PropTypes.shape().isRequired,
 };
 
-export default Feed;
+export default connect(
+  ({ user }) => ({ user }),
+)(Feed);
