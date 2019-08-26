@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { CAPTURE_USER } from '../../../constants/types';
-import { APP_NAME, API_URL } from '../../../constants/config';
+import { APP_NAME } from '../../../constants/config';
 
 import AuthContainer from '../../../containers/AuthContainer';
 
@@ -32,24 +32,6 @@ const Login = ({
   captureUser,
 }) => {
   const [loading, setLoading] = useState(false);
-
-  // const authUser = async (creds) => {
-  //   try {
-  //     const post = await fetch(API_URL, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-
-  //       },
-  //     });
-
-  //     const result = await post.json();
-
-  //     console.log(result);
-  //   } catch (error) {
-  //     console.log(error); // eslint-disable-line
-  //   }
-  // };
 
   const signIn = async () => {
     setLoading(true);
@@ -86,7 +68,7 @@ const Login = ({
           setLoading(false);
           navigation.navigate('Feed');
         }).catch((e) => {
-          console.log(e);
+          console.log(e); // eslint-disable-line
           setLoading(false);
         });
     }
@@ -116,7 +98,7 @@ const Login = ({
 };
 
 Login.navigationOptions = {
-  title: APP_NAME,
+  header: null,
 };
 
 Login.propTypes = {
