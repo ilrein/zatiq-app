@@ -4,4 +4,4 @@ export const APP_NAME = 'DineHub';
 // export const API_URL = 'https://contractstyle.com';
 
 // dev
-export const API_URL = 'http://localhost:4000';
+export const API_URL = 'http://localhost:4000/client';

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { CAPTURE_USER } from '../../../constants/types';
-import { APP_NAME } from '../../../constants/config';
+import { API_URL } from '../../../constants/config';
 
 import AuthContainer from '../../../containers/AuthContainer';
 
@@ -51,20 +51,30 @@ const Login = ({
         { token, expires_at: expires },
         { name },
       )
-        .then((credentials) => {
-          captureUser(credentials);
+        .then(async (credentials) => {
           // console.log(credentials);
-
-          // const payload = {
-          //   sessionToken: credentials.sessionToken,
-          //   sub: credentials.data.IdentityId,
-          //   name,
-          // };
-
-          // console.log(payload);
-
-          // authUser(payload);
-
+          const userParams = {
+            sub: credentials._identityId,
+            name,
+          };
+          // console.log(userParams);
+          try {
+            const post = await fetch(`${API_URL}/customers`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                // 'jwt-token': userParams.token,
+              },
+              body: JSON.stringify({
+                customer: userParams,
+              }),
+            });
+      
+            const result = await post.json();
+            captureUser(result);
+          } catch (error) {
+            console.log(error); // eslint-disable-line
+          }
           setLoading(false);
           navigation.navigate('Feed');
         }).catch((e) => {
