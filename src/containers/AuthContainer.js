@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
-import { Auth, Cache } from 'aws-amplify';
+import {
+  Auth,
+  // Cache,
+} from 'aws-amplify';
 import { connect } from 'react-redux';
 
 import { CAPTURE_USER } from '../constants/types';
@@ -36,16 +39,18 @@ const AuthContainer = ({
       const currentUser = await Auth.currentAuthenticatedUser();
 
       if (currentUser) {
-        const federatedInfo = await Cache.getItem('federatedInfo');
+        // const federatedInfo = await Cache.getItem('federatedInfo');
         
-        const { token } = federatedInfo;
+        // const { token } = federatedInfo;
+
+        // console.log(currentUser);
 
         const userParams = {
-          ...currentUser,
-          token,
+          sub: currentUser.id,
+          name: currentUser.name,
         };
 
-        authUser(currentUser);
+        authUser(userParams);
 
         captureUser(userParams);
         navigation.navigate('Feed');

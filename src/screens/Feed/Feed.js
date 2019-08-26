@@ -20,21 +20,21 @@ const Feed = ({
   navigation,
   user,
 }) => {
-  // const getRestaurants = async () => {
-  //   try {
-  //     const get = fetch(`${API_URL}/restaurants`);
+  const getRestaurants = async () => {
+    try {
+      const get = fetch(`${API_URL}/restaurants`);
 
-  //     const result = await get.json();
+      const result = await get.json();
 
-  //     console.log(result);
-  //   } catch (error) {
-  //     console.log(error); // eslint-disable-line
-  //   }
-  // };
+      console.log(result);
+    } catch (error) {
+      console.log(error); // eslint-disable-line
+    }
+  };
 
-  // useEffect(() => {
-  //   getRestaurants();
-  // }, [user.id]);
+  useEffect(() => {
+    getRestaurants();
+  }, [user.sub]);
 
   return (
     <View style={styles.container}>
@@ -52,6 +52,7 @@ Feed.navigationOptions = {
 
 Feed.propTypes = {
   navigation: PropTypes.shape().isRequired,
+  user: PropTypes.shape().isRequired,
 };
 
 export default connect(
