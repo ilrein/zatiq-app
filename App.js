@@ -5,7 +5,7 @@ import {
   createBottomTabNavigator,
   createAppContainer,
 } from 'react-navigation';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth, Cache } from 'aws-amplify';
 import { Provider } from 'react-redux';
 
 // Auth
@@ -29,12 +29,25 @@ const store = configureStore();
 
 Amplify.configure(AWSExports);
 
-// Storage.configure({
-//   AWSS3: {
-//       bucket: '',//Your bucket name;
-//       region: ''//Specify the region your bucket was created in;
-//   }
-// });
+const refreshToken = async () => {
+  const federatedInfo = await Cache.getItem('federatedInfo');
+  
+  const { token, expires_at } = federatedInfo;
+
+  return new Promise((response) => {
+    const data = {
+      token, // the token from the provider
+      expires_at,
+    }
+    response(data);
+  });
+}
+
+Auth.configure({
+  refreshHandlers: {
+    'facebook': refreshToken,
+  },
+});
 
 // Authentication related screens
 // all on the opening areas

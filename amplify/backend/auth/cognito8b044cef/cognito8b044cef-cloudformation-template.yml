@@ -126,7 +126,10 @@ Parameters:
                                                     
   useDefault:
     Type: String
-              
+                  
+  usernameAttributes:
+    Type: CommaDelimitedList
+        
   hostedUI:
     Type: String
           
@@ -210,6 +213,8 @@ Resources:
           RequireNumbers: true
           RequireSymbols: true
           RequireUppercase: true
+      
+      UsernameAttributes: !Ref usernameAttributes
           
       MfaConfiguration: !Ref mfaConfiguration
       SmsVerificationMessage: !Ref smsVerificationMessage
@@ -222,7 +227,7 @@ Resources:
   # Depends on UserPool for ID reference
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
-      ClientName: cognitoa5c1331c_app_clientWeb
+      ClientName: cognito8b044cef_app_clientWeb
       
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
@@ -701,7 +706,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'cognitoa5c1331c_identitypool_a5c1331c', !Join ['',['cognitoa5c1331c_identitypool_a5c1331c', '__', !Ref env]]]
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'cognito8b044cef_identitypool_8b044cef', !Join ['',['cognito8b044cef_identitypool_8b044cef', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient

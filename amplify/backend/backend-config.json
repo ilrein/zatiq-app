@@ -1,7 +1,19 @@
 {
 	"auth": {
-		"cognitoa5c1331c": {
+		"cognito8b044cef": {
 			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"storage": {
+		"zstorage": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
 			"providerPlugin": "awscloudformation"
 		}
 	}

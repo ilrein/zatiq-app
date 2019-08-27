@@ -1,18 +1,18 @@
 {
-    "dev": {
+    "prod": {
         "awscloudformation": {
-            "AuthRoleName": "zatiq-app-dev-20190815160338-authRole",
-            "UnauthRoleArn": "arn:aws:iam::869691786575:role/zatiq-app-dev-20190815160338-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::869691786575:role/zatiq-app-dev-20190815160338-authRole",
+            "AuthRoleName": "zatiq-application-prod-20190618184644-authRole",
+            "UnauthRoleArn": "arn:aws:iam::869691786575:role/zatiq-application-prod-20190618184644-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::869691786575:role/zatiq-application-prod-20190618184644-authRole",
             "Region": "us-east-1",
-            "DeploymentBucketName": "zatiq-app-dev-20190815160338-deployment",
-            "UnauthRoleName": "zatiq-app-dev-20190815160338-unauthRole",
-            "StackName": "zatiq-app-dev-20190815160338",
-            "StackId": "arn:aws:cloudformation:us-east-1:869691786575:stack/zatiq-app-dev-20190815160338/c63d8c00-bf97-11e9-afc9-0a009cdf2216"
+            "DeploymentBucketName": "zatiq-application-prod-20190618184644-deployment",
+            "UnauthRoleName": "zatiq-application-prod-20190618184644-unauthRole",
+            "StackName": "zatiq-application-prod-20190618184644",
+            "StackId": "arn:aws:cloudformation:us-east-1:869691786575:stack/zatiq-application-prod-20190618184644/f2ab2c20-921a-11e9-a051-0ecfb0c7c934"
         },
         "categories": {
             "auth": {
-                "cognitoa5c1331c": {
+                "cognito8b044cef": {
                     "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"705885429837326\",\"client_secret\":\"afab0f2f9d2bf70f72430a7ab1cca511\"}]"
                 }
             }
