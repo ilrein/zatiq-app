@@ -38,7 +38,7 @@ const Login = ({
     setLoading(true);
     
     const { type, token, expires } = await Facebook.logInWithReadPermissionsAsync(
-      '705885429837326', {
+      process.env.FB_APP_ID, {
         permissions: ['public_profile', 'email'],
       },
     );

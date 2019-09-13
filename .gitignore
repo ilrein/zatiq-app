@@ -20,3 +20,6 @@ dist/
 node_modules/
 aws-exports.js
 awsconfiguration.json
+
+set-keys.sh
+.env
